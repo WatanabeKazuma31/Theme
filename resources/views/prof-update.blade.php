@@ -45,11 +45,11 @@
   {{Form::password('password', ['class' => 'i-control'])}}
 </div>
 
-
-</div>
-
 <button type="submit" class="btn btn-primary pull-right">更新</button>
 
 {!! Form::close() !!}
 
 @endsection
+
+
+</div>

@@ -121,7 +121,9 @@ class User extends Model
     // 検索結果
     public static function searchKey($keyword)
     {
+        // 検索ボックスに入力された文字（$keyword）をUsersテーブルのnameカラムから曖昧検索
         $items = self::where('name', 'like', '%' . $keyword . '%')
+            // ログイン中のユーザー以外
             ->where('id', '<>', Auth::user()->id)
             ->get();
 

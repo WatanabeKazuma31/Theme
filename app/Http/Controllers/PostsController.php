@@ -199,7 +199,7 @@ class PostsController extends Controller
         $userid = User::User();
         $pattern = "/[　\s_%]/u";
 
-        // $followedからfollowed_user_idを配列で抽出
+        // FollowモデルのgetFollowedUserIdsByUserId使用しフォロー中ユーザーのidを配列で抽出
         $id = Follow::getFollowedUserIdsByUserId($userid);
 
         return view('searchForm', ['keyword' => $keyword, 'items' => $items, 'id' => $id, 'pattern' => $pattern]);
@@ -211,7 +211,8 @@ class PostsController extends Controller
     // フォローする
     public function follow($userId)
     {
-        // attach($userId) メソッドは、Auth::user() の followAction() リレーションシップに新しい $userId の値を追加するために使用
+        // attach($userId) メソッドは、Auth::user()のfollowAction()リレーションシップに新しい$userIdの値を追加するために使用
+        // followAction()はprovidersのUser.phpに記述
         Auth::user()->followAction()->attach($userId);
         return back();
     }
@@ -219,7 +220,7 @@ class PostsController extends Controller
     // フォロー解除
     public function unfollow($userId)
     {
-        // detach($userId) メソッドは、Auth::user() の followAction() リレーションシップから指定された $userId の値を削除するために使用
+        // detach($userId)メソッドは、Auth::user()のfollowAction()リレーションシップから指定された$userIdの値を削除するために使用
         Auth::user()->followAction()->detach($userId);
         return back();
     }

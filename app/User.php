@@ -44,6 +44,7 @@ class User extends Authenticatable
     // ログインユーザーが他のユーザーをフォローする多対多の関係を定義(followsテーブルの'user_id'と'followed_user_id'を使用)
     public function followAction()
     {
+        // UsersテーブルとFollowsテーブルを関連付けさせる
         return $this->belongsToMany(self::class, 'follows', 'user_id', 'followed_user_id');
     }
 
